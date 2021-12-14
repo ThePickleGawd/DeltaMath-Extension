@@ -4,17 +4,16 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.set({ color });
   console.log("Default background color set to %cgreen", `color: ${color}`);
 
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
-    chrome.declarativeContent.onPageChanged.addRules([deltaMathRule]);
+  chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
+    chrome.declarativeContent.onPageChanged.addRules([
+      {
+        conditions: [
+          new chrome.declarativeContent.PageStateMatcher({
+            pageUrl: { hostEquals: "www.deltamaths.com" },
+          }),
+        ],
+        actions: [new chrome.declarativeContent.ShowAction()],
+      },
+    ]);
   });
 });
-
-// Checks if url is at delta math
-var deltaMathRule = {
-  conditions: [
-    new chrome.declarativeContent.PageStateMatcher({
-      pageUrl: { hostEquals: "deltamath.com" },
-    }),
-  ],
-  actions: [new chrome.declarativeContent.ShowPageAction()],
-};

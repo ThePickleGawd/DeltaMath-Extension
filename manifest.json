@@ -1,18 +1,13 @@
 {
-  "name": "Getting Started Example",
-  "description": "Build an Extension!",
+  "name": "DeltaMath Extension",
+  "description": "Better DeltaMath experience",
   "version": "1.0",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": [
-    "storage",
-    "activeTab",
-    "scripting",
-    "declarativeContent",
-    "https://deltamath.com/*"
-  ],
+  "permissions": ["storage", "activeTab", "scripting", "declarativeContent"],
+  "host_permissions": ["https://www.deltamath.com/*"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -22,6 +17,12 @@
       "128": "/images/get_started128.png"
     }
   },
+  "content_scripts": [
+    {
+      "matches": ["https://*.nytimes.com/*"],
+      "js": ["content-script.js"]
+    }
+  ],
   "icons": {
     "16": "/images/get_started16.png",
     "32": "/images/get_started32.png",
