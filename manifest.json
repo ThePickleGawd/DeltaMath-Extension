@@ -19,7 +19,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*.nytimes.com/*"],
+      "matches": ["https://*.deltamath.com/*"],
       "js": ["content-script.js"]
     }
   ],
